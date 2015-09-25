@@ -70,7 +70,7 @@ EOF
 systemctl daemon-reload
 
 # ENABLE WSTUNNEL SERVICE
-echo "Enabling uca.service on startup"
+echo "Enabling UCA service on startup"
 systemctl enable uca.service
 
 echo "The uca binary is located in /usr/local/bin/ and config file created in /etc/uca/uca.toml"
