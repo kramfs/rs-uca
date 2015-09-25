@@ -2,14 +2,14 @@
 
 # CHECK IF RUNNING AS ROOT OR SUDO 
 if [ "$(id -u)" != "0" ]; then
-	echo "Please run as root or use sudo ./wstunnel-systemd.sh"
+	echo "Please run as root or use sudo ./setup-uca"
 	exit 1
 fi
 
 # DOWNLOAD THE WSTUNNEL BINARY
 
 cd /tmp
-wget https://binaries.rightscale.com/rsbin/uca/v0.3.3/uca-linux-amd64.tgz
+wget https://binaries.rightscale.com/rsbin/uca/v0.3.5/uca-linux-amd64.tgz
 tar zxf uca-linux-amd64.tgz
 mv -vf uca/uca /usr/local/bin/
 # cp uca-sample.toml uca.toml 
