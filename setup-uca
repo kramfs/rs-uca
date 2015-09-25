@@ -9,7 +9,7 @@ fi
 # DOWNLOAD THE WSTUNNEL BINARY
 
 cd /tmp
-wget https://binaries.rightscale.com/rsbin/uca/v0.3.2/uca-linux-amd64.tgz
+wget https://binaries.rightscale.com/rsbin/uca/v0.3.3/uca-linux-amd64.tgz
 tar zxf uca-linux-amd64.tgz
 mv -vf uca/uca /usr/local/bin/
 # cp uca-sample.toml uca.toml 
