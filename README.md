@@ -5,6 +5,7 @@ Requirements
 -------------
 - CentOS 7
 - ssh access with root or sudo permission
+- wget and git package
 
 Clone
 -------------
