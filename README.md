@@ -14,7 +14,7 @@ Customize the required inputs
 -------------
 `cd rs-uca`
 
-`vi wstunnel-systemd.sh`
+`vi setup-uca`
 
 Edit the following adding the required inputs. 
 > token="xxyyzz-jf7XuZmSaRSVq8Y5fJ7k"
