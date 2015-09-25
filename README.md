@@ -40,3 +40,12 @@ Start the script
 This will setup the config file and make the service auto-start on boot
 
 `sudo ./setup-uca`
+
+Next Step:
+-------------
+
+Register the UCA Cloud in the RightScale platform - http://uca.surge.sh/uca/reference/register_uca.html
+
+Import ST - https://www.rightscale.com/library/server_templates/RightLink-10/lineage/55642
+
+Enable instance - http://uca.surge.sh/uca/reference/test_uca.html
