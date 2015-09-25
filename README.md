@@ -38,9 +38,11 @@ Make the file executable:
 
 Start the script
 -------------
-This will setup the config file and make the service auto-start on boot
+This will setup the config file, start the sevice and also make the service auto-start on boot
 
 `sudo ./setup-uca`
+
+UCA logs will be sent to /var/log/messages
 
 Next Step:
 -------------
