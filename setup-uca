@@ -6,7 +6,10 @@ if [ "$(id -u)" != "0" ]; then
 	exit 1
 fi
 
-# DOWNLOAD THE WSTUNNEL BINARY
+# DOWNLOAD THE UCA BINARY
+
+# install prerequitites
+yum -y install wget git
 
 cd /tmp
 wget https://binaries.rightscale.com/rsbin/uca/v0.3.5/uca-linux-amd64.tgz
