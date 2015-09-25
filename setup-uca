@@ -1,0 +1,79 @@
+#!/bin/bash -e
+
+# CHECK IF RUNNING AS ROOT OR SUDO 
+if [ "$(id -u)" != "0" ]; then
+	echo "Please run as root or use sudo ./wstunnel-systemd.sh"
+	exit 1
+fi
+
+# DOWNLOAD THE WSTUNNEL BINARY
+
+cd /tmp
+wget https://binaries.rightscale.com/rsbin/uca/v0.3.2/uca-linux-amd64.tgz
+tar zxf uca-linux-amd64.tgz
+mv -vf uca/uca /usr/local/bin/
+# cp uca-sample.toml uca.toml 
+# vi uca.toml 
+
+# GENERATE CONFIG FILE
+
+mkdir -p /etc/uca
+
+cat <<EOF> /etc/uca/uca.toml
+# Configuration for the wstunnel connection, this needs to match what is used
+# during the cloud registration
+
+# Edit the following, only replace token, api_hostname and api_credential
+# Use https://www.random.org/strings/?num=1&len=20&digits=on&upperalpha=on&loweralpha=on&unique=on&format=html&rnd=new to generate 20 random string which you can use for the token
+# For api_hostname, use the shard where the account is located, us-3 or us-4.rightscale.com
+
+[wstunnel]
+server="wstunnel10-1.rightscale.com"
+token="xxyyzz-jf7XuZmSaRSVq8Y5fJ7k"	  # see above link to generate random string
+
+# Credentials required by the UCA appliance on an ongoing basis in order to
+# be able to initially create a server to represent itself, and thereafter
+# in order to perform keep-alive checks on all instances it "launches"
+[owner]
+api_hostname="us-3.rightscale.com"     # us-3 us-4.rightscale.com depending on where the account you're adding this cloud is hosted
+api_credential="xx0dc1yyb709a45e33d3zz05b3088300126e22bf"     # from the dashboard: settings > account > api_credentials
+
+
+# Parameters for the required cloud for bare servers, i.e., servers that are set-up manually
+# and not launched via some sort of API
+# This cloud is required to exist and to be registered with RightScale first because UCA uses it
+# to run itself: the UCA appears as a server in that cloud allowing it to send monitoring data
+# as well as audit entries
+#[bare_server_cloud]
+
+EOF
+
+# CREATE THE UCA SERVICE SCRIPT
+cat <<EOF> /usr/lib/systemd/system/uca.service
+[Unit]
+Description=UCA service
+After=network.target
+Wants=
+
+[Service]
+EnvironmentFile=/etc/uca/uca.toml
+ExecStart=/usr/local/bin/uca --config=/etc/uca/uca.toml
+KillMode=process
+Restart=on-failure
+#RestartSec=42s
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+# RELOAD SYSTEMD
+systemctl daemon-reload
+
+# ENABLE WSTUNNEL SERVICE
+echo "Enabling uca.service on startup"
+systemctl enable uca.service
+
+echo "The uca binary is located in /usr/local/bin/ and config file created in /etc/uca/uca.toml"
+
+# START THE SERVICE
+systemctl start uca.service
