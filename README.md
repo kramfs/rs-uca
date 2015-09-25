@@ -1,7 +1,7 @@
 # rs-uca
 Rightscale Universal Cloud Appliance
 
-Reuqirements
+Requirements
 -------------
 - CentOS 7
 - ssh access with root or sudo permission
