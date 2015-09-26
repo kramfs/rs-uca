@@ -6,8 +6,9 @@ if [ "$(id -u)" != "0" ]; then
 	exit 1
 fi
 
-# DOWNLOAD THE UCA BINARY
-
+###########################
+# DOWNLOAD THE UCA BINARY #
+###########################
 # install prerequitites
 yum -y install wget git
 
@@ -18,8 +19,9 @@ mv -vf uca/uca /usr/local/bin/
 # cp uca-sample.toml uca.toml 
 # vi uca.toml 
 
-# GENERATE CONFIG FILE
-
+########################
+# GENERATE CONFIG FILE #
+########################
 mkdir -p /etc/uca
 
 cat <<EOF> /etc/uca/uca.toml
@@ -51,7 +53,11 @@ api_credential="xx0dc1yyb709a45e33d3zz05b3088300126e22bf"     # from the dashboa
 
 EOF
 
-# CREATE THE UCA SERVICE SCRIPT
+
+#################################
+# CREATE THE UCA SERVICE SCRIPT #
+#################################
+
 cat <<EOF> /usr/lib/systemd/system/uca.service
 [Unit]
 Description=UCA service
@@ -69,14 +75,20 @@ Restart=on-failure
 WantedBy=multi-user.target
 EOF
 
-# RELOAD SYSTEMD
+##################
+# RELOAD SYSTEMD #
+##################
 systemctl daemon-reload
 
-# ENABLE WSTUNNEL SERVICE
+###########################
+# ENABLE WSTUNNEL SERVICE #
+###########################
 echo "Enabling UCA service on startup"
 systemctl enable uca.service
 
 echo "The uca binary is located in /usr/local/bin/ and config file created in /etc/uca/uca.toml"
 
-# START THE SERVICE
+#####################
+# START THE SERVICE #
+#####################
 systemctl start uca.service
