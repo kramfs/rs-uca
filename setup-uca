@@ -53,7 +53,7 @@ api_credential="xx0dc1yyb709a45e33d3zz05b3088300126e22bf"     # from the dashboa
 # This cloud is required to exist and to be registered with RightScale first because UCA uses it
 # to run itself: the UCA appears as a server in that cloud allowing it to send monitoring data
 # as well as audit entries
-#[bare_server_cloud]
+[bare_server_cloud]
 
 EOF
 
