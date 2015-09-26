@@ -9,10 +9,13 @@ fi
 ###########################
 # DOWNLOAD THE UCA BINARY #
 ###########################
-# install prerequitites
+# install prerequisites
 yum -y install wget git
 
+# Cleanup previously downloaded version
 cd /tmp
+rm -f uca-linux-amd64.*
+
 wget https://binaries.rightscale.com/rsbin/uca/v0.3.6/uca-linux-amd64.tgz
 tar zxf uca-linux-amd64.tgz
 mv -vf uca/uca /usr/local/bin/
