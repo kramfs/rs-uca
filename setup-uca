@@ -94,5 +94,5 @@ echo "The uca binary is located in /usr/local/bin/ and config file created in /e
 echo "Starting UCA service.."
 systemctl start uca.service
 
-pause 2
+sleep 2
 service uca status |grep -i active
