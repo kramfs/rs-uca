@@ -24,7 +24,7 @@ mv -vf uca/uca /usr/local/bin/
 ########################
 mkdir -p /etc/uca
 
-echo "\nGenerating config file..."
+echo "Generating config file..."
 cat <<EOF> /etc/uca/uca.toml
 # Configuration for the wstunnel connection, this needs to match what is used
 # during the cloud registration
@@ -87,12 +87,12 @@ systemctl daemon-reload
 echo "Enabling UCA service to autostart on boot"
 systemctl enable uca.service
 
-echo "\n The uca binary is located in /usr/local/bin/ and config file created in /etc/uca/uca.toml"
+echo "The uca binary is located in /usr/local/bin/ and config file created in /etc/uca/uca.toml"
 
 #####################
 # START THE SERVICE #
 #####################
-echo "\nStarting UCA service.."
+echo "Starting UCA service.."
 systemctl start uca.service
 
 sleep 2
